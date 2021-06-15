@@ -41,7 +41,6 @@ public class Program {
             }
             System.out.println("Количество слов в тексте : " + count1);
 
-
         List<String> wordsKir = new ArrayList<>(Arrays.asList(contents.split("[^А-Яа-я]+")));
         //System.out.println(wordsKir);
         System.out.println("Колличество слов в тексте на кириллице:  " + wordsKir.size());
@@ -129,24 +128,27 @@ public class Program {
         list.add("Отношение символов на кириллице к латинским символам: " + cnt / cnt1 * 100 + " %");
         list.add("Колличество слов в тексте начинающихся с согласных (кириллица и латиница): " + Arrays.stream(contents.split("\\s+")).filter(x -> letters1.contains(x.substring(0, 1))).count());
         list.add("Колличество слов в тексте начинающихся с гласных (кириллица и латиница): " + Arrays.stream(contents.split("\\s+")).filter(x -> letters2.contains(x.substring(0, 1))).count());
-
         System.out.println("###############################################################");
+
         try {
             Files.write(Paths.get("src/main/resources/output/LatinText.txt"), wordsLat, StandardOpenOption.CREATE);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         try {
             Files.write(Paths.get("src/main/resources/output/KirillText.txt"), wordsKir, StandardOpenOption.CREATE);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         try {
             Files.write(Paths.get("src/main/resources/output/InformationFail.txt"),list , StandardOpenOption.CREATE);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
                 private static String readUsingScanner (String fileName) throws IOException {
                     Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
                     String data = scanner.useDelimiter("\\A").next();
